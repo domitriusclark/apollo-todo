@@ -24,6 +24,7 @@ const TodoFormContainer = styled.div`
         padding: 1.3rem;
         background: rebeccapurple;
         color: white;
+        border-radius: 4px;
         
         
 

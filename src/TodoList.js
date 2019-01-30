@@ -34,9 +34,9 @@ const TodoList = () => {
                 return (                
                     <TodoListContainer>
                         {todos.map((todo) => {
-                            const { id, text } = todo;
+                            const { id } = todo;
                             return (
-                                <Todo id={id} text={text} />
+                                <Todo key={id} {...todo} />
                             )
                         })}
                     </TodoListContainer>                    

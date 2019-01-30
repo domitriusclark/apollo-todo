@@ -12,6 +12,7 @@ const TodoListContainer = styled.div`
     margin-top: 3rem;
     height: auto;
 `
+
 const GET_TODO_LIST = gql`
     query GetTodoList {
         todos @client {
@@ -29,9 +30,10 @@ const TodoList = () => {
                 if (error) return <h1>Error...</h1>
                 if (loading) return <h1>loading...</h1>
 
+                const { todos } = data;
                 return (                
                     <TodoListContainer>
-                        {data.todos.map((todo) => {
+                        {todos.map((todo) => {
                             const { id, text } = todo;
                             return (
                                 <Todo id={id} text={text} />

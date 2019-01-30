@@ -54,6 +54,7 @@ export default {
             }
 
             cache.writeData({ data });
+            
             return null;
         }
     },

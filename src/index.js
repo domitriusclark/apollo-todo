@@ -13,10 +13,28 @@ import App from './App';
 
 const cache = new InMemoryCache();
 
+const typeDefs = `
+    type Todo {
+        id: Int!
+        text: String!
+        isCompleted: Boolean
+    }
+
+    type Mutation {
+        addTodo(text: String!): Todo
+        toggleTodo(id: Int!): Todo
+    }
+
+    type Query {
+        todos: [Todo]
+    }
+`
+
 const stateLink = withClientState({
     cache,
     defaults,
-    resolvers
+    resolvers,
+    typeDefs
 })
 
 const client = new ApolloClient({

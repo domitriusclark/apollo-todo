@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import TodoForm from './TodoForm';
-import TodoList from './TodoList';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 const AppWrapper = styled.div`
 	margin: 7rem;

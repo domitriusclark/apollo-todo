@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import styled from 'styled-components';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
@@ -10,9 +10,11 @@ const AppWrapper = styled.div`
 class App extends Component {
   render() {
     return (
-      <AppWrapper className="App">
-		<TodoForm />
-		<TodoList />
+      <AppWrapper className="App">  
+        <TodoForm />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TodoList />
+        </Suspense>        
       </AppWrapper>
     );
   }

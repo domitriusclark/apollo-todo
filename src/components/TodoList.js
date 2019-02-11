@@ -1,7 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { Query } from 'react-apollo';
+import { useQuery } from 'react-apollo-hooks';
 
 import Todo from './Todo';
 
@@ -11,7 +11,7 @@ const TodoListContainer = styled.div`
     align-items: center;
     margin-top: 3rem;
     height: auto;
-`
+`;
 
 const GET_TODO_LIST = gql`
     query GetTodoList {
@@ -21,28 +21,21 @@ const GET_TODO_LIST = gql`
             isCompleted
         }
     }
-` 
+`;
 
 const TodoList = () => {
-    return (
-        <Query query={GET_TODO_LIST}>
-            {({data, error, loading}) => {
-                if (error) return <h1>Error...</h1>
-                if (loading) return <h1>loading...</h1>
+    const { data } = useQuery(GET_TODO_LIST);
+    const { todos } = data;
 
-                const { todos } = data;
-                return (                
-                    <TodoListContainer>
-                        {todos.map((todo) => {
-                            const { id } = todo;
-                            return (
-                                <Todo key={id} {...todo} />
-                            )
-                        })}
-                    </TodoListContainer>                    
+    return (     
+        <TodoListContainer>
+            {todos.map((todo) => {
+                const { id } = todo;
+                return (
+                    <Todo key={id} {...todo} />
                 )
-            }}
-        </Query>
+            })}
+        </TodoListContainer>  
     )
 }
 

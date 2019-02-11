@@ -1,7 +1,7 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
 import styled from 'styled-components';
 import gql from 'graphql-tag';
+import { useMutation } from 'react-apollo-hooks';
 
 const TodoFormContainer = styled.div`
     display: flex;
@@ -48,26 +48,21 @@ const ADD_TODO = gql`
 `
 
 const TodoForm = () => {
-    return (
-        <Mutation mutation={ADD_TODO}>
-            {(addTodo) => {
-                let input;
-                return (
-                    <TodoFormContainer>
-                        <h1>Todos</h1>
-                        <StyledForm onSubmit={(e) => {
-                            e.preventDefault();
-                            addTodo({ variables: { text: input.value}});
-                            input.value = ''
-                        }}>
-                            <input ref={node => {input = node}} />
-                            <button>Add</button>
-                        </StyledForm>          
-                    </TodoFormContainer>
-                )
-            }}
-        </Mutation>
+    let input;
+    const addTodo = useMutation(ADD_TODO);
 
+    return (
+        <TodoFormContainer>
+            <h1>Todos</h1>
+            <StyledForm onSubmit={(e) => {
+                e.preventDefault();
+                addTodo({ variables: { text: input.value}});
+                input.value = ''
+            }}>
+                <input ref={node => {input = node}} />
+                <button>Add</button>
+            </StyledForm>          
+        </TodoFormContainer>
     )
 }
 
